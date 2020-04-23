@@ -2,17 +2,6 @@
 
 <launch>
 
-  <!-- global map server -->
-  <node        name           = 'global_map_server'
-               pkg            = 'map_server'
-               type           = 'map_server'
-               args           = '$(find f1tenth-sim)/map/race_track.yaml'
-               output         = 'screen'>
-  <param       name           = 'frame_id'
-               value          = 'map'/> </node>
-  <remap       from           = 'map'
-               to             = '/map'/>
-
   <!-- spawn car_1 and launch Gazebo -->
   <include     file           = '$(find f1tenth-sim)/config/one_car.launch.xml'>
   <arg         name           = 'car_name'
@@ -22,10 +11,11 @@
   <arg         name           = 'y_pos'
                value          = '-5.0'/>
   <arg         name           = 'paint'
-               value          = 'Yellow'/>
+               value          = 'DarkGray'/>
   <arg         name           = 'run_gazebo'
                value          = 'true'/> </include>
 
-  
+  <!-- visualize the laser scan -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find f1tenth-sim)/rviz/laser_scan.rviz" />
 
 </launch>

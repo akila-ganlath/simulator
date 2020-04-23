@@ -30,7 +30,7 @@
 
   <!-- simulator arguments -->
   <arg         name           = 'world_name'
-               default        = 'race_track'/>
+               default        = 'road'/>
   <arg         name           = 'gui'
                default        = 'true'/>
   <arg         name           = 'run_camera'
@@ -51,7 +51,8 @@
   <arg         name           = 'world_name'
                value          = '$(find f1tenth-sim)/world/$(arg world_name).world'/>
   <arg         name           = 'gui'
-               value          = '$(arg gui)'/> </include> </group>
+               value          = '$(arg gui)'/> 
+  </include> </group>
 
   <!-- check if remote control is required -->
   <!--

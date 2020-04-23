@@ -9,27 +9,40 @@
   <!-- inertial parameter macros -->
 
   <xacro:macro name="chassis_inertial_params">
-    <origin xyz="0.1477 0 0" rpy="0 0 0" />
-    <mass value="4.0" />
-    <inertia ixx="0.010609" ixy="0"          ixz="0"
+    <!-- <origin xyz="0.1477 0 0" rpy="0 0 0" />
+    <mass value="13.0" /> -->
+    <!-- <inertia ixx="0.010609" ixy="0"          ixz="0"
                             iyy="0.050409"   iyz="0"
-                                             izz="0.05865" />
+                                             izz="0.05865" /> -->
+    <mass value="800.0"/>    
+    <origin rpy="0 0 0" xyz="0.1 0 0.4"/>
+    <inertia ixx="140" ixy="0.0" ixz="0.0" iyy="550" iyz="0.0" izz="550"/>
   </xacro:macro>
 
   <xacro:macro name="left_wheels_inertial_params">
-    <origin xyz="0 0 -0.0225" rpy="0 0 0" />
+    <!-- <origin xyz="0 0 -0.0225" rpy="0 0 0" />
     <mass value="0.34055" />
     <inertia ixx="0.00026046" ixy="0"          ixz="0"
                               iyy="0.00026046" iyz="0"
-                                               izz="0.00041226" />
+                                              izz="0.00041226" /> -->
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <mass value="20" />
+    <inertia ixx="0.5" ixy="0"          ixz="0"
+                              iyy="0.5" iyz="0"
+                                               izz="1.0" />
   </xacro:macro>
 
   <xacro:macro name="right_wheels_inertial_params">
-    <origin xyz="0 0 0.0225" rpy="0 0 0" />
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <mass value="20" />
+    <inertia ixx="0.5" ixy="0"          ixz="0"
+                              iyy="0.5" iyz="0"
+                                               izz="1.0" />
+    <!-- <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <mass value="0.34055" />
     <inertia ixx="0.00026046" ixy="0"          ixz="0"
                               iyy="0.00026046" iyz="0"
-                                               izz="0.00041226" />
+                                               izz="0.00041226" /> -->
   </xacro:macro>
 
   <xacro:macro name="steering_hinge_inertial_params">
@@ -49,13 +62,13 @@
   </xacro:macro>
 
 
-  <!-- geometry macros -->
+  <!-- visual geometry macros -->
 
   <xacro:macro name="chassis_geometry">
     <!-- <origin xyz="0.46 -0.135 -0.180" rpy="1.57 0 3.14" /> -->
-    <origin rpy="-1.5708 0 3.1416" xyz="0.175 0.35 0.07"/>
+    <origin rpy="-1.5708 0 3.1416" xyz="0.165 0.3305 0.0075"/>
     <geometry>
-      <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.STL" scale="0.000915 0.000915 0.000915"/>
+      <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.STL" scale="0.00095 0.000925 0.000925"/>
       <!-- <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.stl" scale="0.000990 0.0009375 0.0009375"/> -->
     </geometry>
   </xacro:macro>
@@ -103,17 +116,42 @@
     </geometry>
   </xacro:macro>
 
+  <!-- collision macros -->
+
   <xacro:macro name="left_wheels_collision_geometry">
     <origin xyz="0 0 -0.0225" rpy="0 0 0" />
     <geometry>
-      <cylinder length="0.045" radius="0.05" />
+      <cylinder length="0.062" radius="0.05" />
     </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1.0</mu>
+          <mu2>1.0</mu2>
+        </ode>
+      </friction>
+    </surface>
   </xacro:macro>
 
   <xacro:macro name="right_wheels_collision_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <cylinder length="0.045" radius="0.05" />
+      <cylinder length="0.062" radius="0.05" />
+    </geometry>
+    <surface>
+      <friction>
+        <ode>
+          <mu>1.0</mu>
+          <mu2>1.0</mu2>
+        </ode>
+      </friction>
+    </surface>
+  </xacro:macro>
+
+  <xacro:macro name="chassis_collision_geometry">
+    <origin xyz="0 0 0.4" rpy="0 0 0" />
+    <geometry>
+      <box size="0.860 0.450 0.180"/>
     </geometry>
   </xacro:macro>
 
@@ -154,8 +192,9 @@
       <xacro:chassis_geometry/>
       <material name="red" />
     </visual>
-    <collision>
-    </collision>
+    <!-- <collision>
+      <xacro:chassis_collision_geometry />
+    </collision> -->
   </link>
 
   <joint name="$(arg robot_name)_base_link_joint" type="fixed">
@@ -342,7 +381,7 @@
   </link>
 
   <joint name="$(arg robot_name)_hokuyo_joint" type="fixed">
-    <origin xyz="0.125 0.0 0.155" rpy="0 0 0"/>
+    <origin xyz="0.35 0.0 0.075" rpy="0 0 0"/>
     <parent link="$(arg robot_name)_chassis" />
     <child link="$(arg robot_name)_laser" />
     <axis xyz="0 0 1" />
