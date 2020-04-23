@@ -52,11 +52,9 @@
   <!-- geometry macros -->
 
   <xacro:macro name="chassis_geometry">
-    <!-- <origin xyz="0.46 -0.135 -0.180" rpy="1.57 0 3.14" /> -->
-    <origin rpy="-1.5708 0 3.1416" xyz="0.175 0.35 0.07"/>
+    <origin xyz="0.46 -0.135 -0.180" rpy="1.57 0 3.14" />
     <geometry>
-      <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.STL" scale="0.000915 0.000915 0.000915"/>
-      <!-- <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.stl" scale="0.000990 0.0009375 0.0009375"/> -->
+      <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.stl" scale="0.000990 0.0009375 0.0009375"/>
     </geometry>
   </xacro:macro>
 
