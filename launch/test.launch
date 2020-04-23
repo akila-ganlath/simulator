@@ -1,0 +1,31 @@
+<?xml version='1.0'?>
+
+<launch>
+
+  <!-- global map server -->
+  <node        name           = 'global_map_server'
+               pkg            = 'map_server'
+               type           = 'map_server'
+               args           = '$(find f1tenth-sim)/map/race_track.yaml'
+               output         = 'screen'>
+  <param       name           = 'frame_id'
+               value          = 'map'/> </node>
+  <remap       from           = 'map'
+               to             = '/map'/>
+
+  <!-- spawn car_1 and launch Gazebo -->
+  <include     file           = '$(find f1tenth-sim)/config/one_car.launch.xml'>
+  <arg         name           = 'car_name'
+               value          = 'car_1'/>
+  <arg         name           = 'x_pos'
+               value          = '-9.0'/>
+  <arg         name           = 'y_pos'
+               value          = '-5.0'/>
+  <arg         name           = 'paint'
+               value          = 'Yellow'/>
+  <arg         name           = 'run_gazebo'
+               value          = 'true'/> </include>
+
+  
+
+</launch>

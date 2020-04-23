@@ -49,7 +49,7 @@
   <!-- launch gazebo with track -->
   <include     file           = '$(find gazebo_ros)/launch/empty_world.launch'>
   <arg         name           = 'world_name'
-               value          = '$(find spring_2020_virtual_class)/world/$(arg world_name).world'/>
+               value          = '$(find f1tenth-sim)/world/$(arg world_name).world'/>
   <arg         name           = 'gui'
                value          = '$(arg gui)'/> </include> </group>
 
@@ -62,7 +62,7 @@
   <param       name           = 'autorepeat_rate'
                value          = '20.0'/> </node>
   <node        name           = 'remote_control'
-               pkg            = 'spring_2020_virtual_class'
+               pkg            = 'f1tenth-sim'
                type           = 'remote_control.py'
                args           = '$(arg car_name)'/> </group> -->
 
@@ -70,18 +70,18 @@
   <!--
   <group       if             = '$(arg keyboard_control)'>
   <node        name           = 'keyboard_plugin'
-               pkg            = 'spring_2020_virtual_class'
+               pkg            = 'f1tenth-sim'
                type           = 'keyboard_teleop.py'
                args           = '$(arg car_name)'/> </group> -->
 
   <!-- reset racecar to pit stop -->
   <node        name           = '$(arg car_name)_pit_stop_reset'
-               pkg            = 'spring_2020_virtual_class'
+               pkg            = 'f1tenth-sim'
                type           = 'set_racecar_state.py'
                args           = '$(arg car_name)'/>
 
   <!-- spawn car using the set global parameters -->
-  <include     file           = '$(find spring_2020_virtual_class)/config/vehicle_class.launch.xml'>
+  <include     file           = '$(find f1tenth-sim)/config/vehicle_class.launch.xml'>
   <arg         name           = 'car_name'
                value          = '$(arg car_name)'/>
   <arg         name           = 'x_pos'
