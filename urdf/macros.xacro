@@ -72,7 +72,6 @@
     <origin rpy="-1.5708 0 3.1416" xyz="0.165 0.3305 -0.01"/>
     <geometry>
       <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.STL" scale="0.00095 0.000925 0.000925"/>
-      <!-- <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.stl" scale="0.000990 0.0009375 0.0009375"/> -->
     </geometry>
   </xacro:macro>
 
@@ -80,7 +79,6 @@
   <xacro:macro name="left_rear_wheel_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <!-- <mesh filename="package://f1tenth-sim/urdf/meshes/left_wheel.stl" /> -->
       <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0012 0.0012 0.0012"/>
     </geometry>
   </xacro:macro>
@@ -88,7 +86,6 @@
   <xacro:macro name="right_rear_wheel_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <!-- <mesh filename="package://f1tenth-sim/urdf/meshes/right_wheel.stl" /> -->
       <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0012 0.0012 0.0012"/>
     </geometry>
   </xacro:macro>
@@ -96,7 +93,6 @@
   <xacro:macro name="left_front_wheel_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <!-- <mesh filename="package://f1tenth-sim/urdf/meshes/left_wheel.stl" /> -->
       <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0012 0.0012 0.0012"/>
     </geometry>
   </xacro:macro>
@@ -104,7 +100,6 @@
   <xacro:macro name="right_front_wheel_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <!-- <mesh filename="package://f1tenth-sim/urdf/meshes/right_wheel.stl" /> -->
       <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0012 0.0012 0.0012"/>
     </geometry>
   </xacro:macro>
@@ -124,6 +119,13 @@
   </xacro:macro>
 
   <!-- collision macros -->
+
+  <xacro:macro name="chassis_collision_geometry">
+    <origin xyz="0 0 -0.3" rpy="0 0 0" />
+    <geometry>
+      <box size="0.860 0.450 0.001"/>
+    </geometry>
+  </xacro:macro>
 
   <xacro:macro name="left_wheels_collision_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
@@ -153,13 +155,6 @@
         </ode>
       </friction>
     </surface> -->
-  </xacro:macro>
-
-  <xacro:macro name="chassis_collision_geometry">
-    <origin xyz="0 0 0.4" rpy="0 0 0" />
-    <geometry>
-      <box size="0.860 0.450 0.180"/>
-    </geometry>
   </xacro:macro>
 
   <!-- transmission macros -->
@@ -243,7 +238,7 @@
     <origin xyz="0 0 0" rpy="-1.5708 0 0" />
     <parent link="$(arg robot_name)_left_steering_hinge" />
     <child link="$(arg robot_name)_left_front_wheel" />
-    <axis xyz="0 0 -1" />
+    <axis xyz="0 0 1" />
     <limit effort="10" velocity="100" />
   </joint>
 
@@ -268,7 +263,7 @@
     <origin xyz="0 0.1 0" rpy="-1.5708 0 0" />
     <parent link="$(arg robot_name)_chassis" />
     <child link="$(arg robot_name)_left_rear_wheel" />
-    <axis xyz="0 0 -1" />
+    <axis xyz="0 0 1" />
     <limit effort="10" velocity="100" />
   </joint>
 
@@ -398,7 +393,7 @@
   </joint>
 
 
-  <!-- camera class (spawn parameters) -->
+  camera class (spawn parameters)
   <link name="$(arg robot_name)_link">
     <inertial>
       <mass value="1e-5" />

@@ -137,9 +137,25 @@ def command_callback(data):
     speed          = Float64()
 
     steering_angle.data = data.steering_angle
-    speed.data          = data.speed
+    speed.data          = data.speed * max_speed
 
-    ''' Include logic to convert desired com speed into angular velocity for the wheels'''
+    '''
+    if speed.data >= previous_speed + speed_delta:
+        speed.data = previous_speed + speed_delta
+    elif speed.data <= previous_speed - speed_delta:
+        speed.data = previous_speed - speed_delta
+
+    if speed.data > max_speed:
+        speed.data = max_speed
+    elif speed.data < min_speed:
+        speed.data = min_speed
+
+    previous_speed = speed.data
+
+    if abs(speed.data) < speed_delta:
+        speed.data     = 0.0
+        previous_speed = 0.0
+    '''
 
     pub_vel_LRW.publish(speed)
     pub_vel_RRW.publish(speed)
