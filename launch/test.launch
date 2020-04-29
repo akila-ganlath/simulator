@@ -7,9 +7,9 @@
   <arg         name           = 'car_name'
                value          = 'car_1'/>
   <arg         name           = 'x_pos'
-               value          = '-9.0'/>
+               value          = '0.0'/>
   <arg         name           = 'y_pos'
-               value          = '-5.0'/>
+               value          = '0.0'/>
   <arg         name           = 'paint'
                value          = 'DarkGray'/>
   <arg         name           = 'run_gazebo'

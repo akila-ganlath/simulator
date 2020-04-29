@@ -10,7 +10,7 @@
   <arg         name           = 'y_pos'
                default        = '0.0'/>
   <arg         name           = 'z_pos'
-               default        = '0.5'/>
+               default        = '0.2'/>
   <arg         name           = 'run_gazebo'
                default        = 'false'/>
   <arg         name           = 'paint'
@@ -76,10 +76,10 @@
                args           = '$(arg car_name)'/> </group> -->
 
   <!-- reset racecar to pit stop -->
-  <node        name           = '$(arg car_name)_pit_stop_reset'
+  <!-- <node        name           = '$(arg car_name)_pit_stop_reset'
                pkg            = 'f1tenth-sim'
                type           = 'set_racecar_state.py'
-               args           = '$(arg car_name)'/>
+               args           = '$(arg car_name)'/> -->
 
   <!-- spawn car using the set global parameters -->
   <include     file           = '$(find f1tenth-sim)/config/vehicle_class.launch.xml'>
