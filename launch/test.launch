@@ -9,13 +9,24 @@
   <arg         name           = 'x_pos'
                value          = '0.0'/>
   <arg         name           = 'y_pos'
-               value          = '0.0'/>
+               value          = '-10.0'/>
   <arg         name           = 'paint'
                value          = 'DarkGray'/>
   <arg         name           = 'run_gazebo'
                value          = 'true'/> </include>
 
-  <!-- visualize the laser scan 
-  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find f1tenth-sim)/rviz/laser_scan.rviz" /> -->
+  <!-- spawn car_2 -->
+  <!-- <include     file           = '$(find f1tenth-sim)/config/one_car.launch.xml'>
+  <arg         name           = 'car_name'
+               value          = 'car_2'/>
+  <arg         name           = 'x_pos'
+               value          = '12.0'/>
+  <arg         name           = 'y_pos'
+               value          = '0.0'/>
+  <arg         name           = 'paint'
+               value          = 'DarkGray'/> </include> -->
+
+  <!-- visualize the laser scan -->
+  <!-- <node type="rviz" name="rviz" pkg="rviz" args="-d $(find f1tenth-sim)/rviz/laser_scan.rviz" />  -->
 
 </launch>

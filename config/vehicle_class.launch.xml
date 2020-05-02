@@ -80,6 +80,18 @@
                pkg            = 'f1tenth-sim'
                type           = 'control_plugin.py'
                args           = '$(arg car_name)'
-               output         = 'screen'/> </group>
+               output         = 'screen'/> 
+
+  <!-- lidar-ranging node -->
+  <param name="lidar_ranging/theta_zero" value= "45" />
+  <param name="lidar_ranging/theta" value="90" />
+  <param name="lidar_ranging/freq" value= "10" />
+  <param name="lidar_ranging/resolution" value= "1081" />
+  <param name="lidar_ranging/scan_angle" value= "270" />          
+  <param name="lidar_ranging/buffer_freq" value= "40" />          
+  <param name="lidar_ranging/view_span" value= "1.0" /> 
+  <param name="lidar_ranging/range" value= "1.0" />         
+  <node pkg="testbed_temp" type="lidar-ranging.py" name="lidar_ranging" output="screen">
+  </node> </group>
 
 </launch>
