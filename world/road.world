@@ -60,11 +60,11 @@
         <kinematic>0</kinematic>
       </link>
     </model>
-    <gravity>0 0 -9.8</gravity>
+    <gravity>0 0 -9.81</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type='adiabatic'/>
     <physics name='default_physics' default='0' type='ode'>
-      <max_step_size>0.001</max_step_size>
+      <max_step_size>0.0005</max_step_size>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
@@ -82,25 +82,15 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>471 439000000</sim_time>
-      <real_time>86 421534052</real_time>
-      <wall_time>1588371896 484207355</wall_time>
-      <iterations>85001</iterations>
+      <sim_time>597 78000000</sim_time>
+      <real_time>82 781262203</real_time>
+      <wall_time>1588624381 197240307</wall_time>
+      <iterations>81686</iterations>
       <model name='ground_plane'>
         <pose frame=''>0 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
           <pose frame=''>0 0 0 0 -0 0</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='wall'>
-        <pose frame=''>184 0 0 0 0 -1.57495</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose frame=''>184 0 0 0 0 -1.57495</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -127,7 +117,7 @@
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
         <kinematic>1</kinematic>
-        <pose frame=''>0 0 0 0 -0 0</pose>
+        <pose frame=''>100 0 0.5 0 0 1.5707963267948966</pose>
         <gravity>0</gravity>
         <visual name='visual'>
           <geometry>
@@ -214,9 +204,9 @@
     </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>86.6298 -2.32251 316.134 3.14159 1.57079 3.14159</pose>
-        <view_controller>ortho</view_controller>
-        <projection_type>orthographic</projection_type>
+        <pose frame=''>-7.21028 -1.95223 2.86855 -0 -0.06521 -0.390415</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
       </camera>
     </gui>
   </world>

@@ -89,9 +89,11 @@
   <param name="lidar_ranging/resolution" value= "1081" />
   <param name="lidar_ranging/scan_angle" value= "270" />          
   <param name="lidar_ranging/buffer_freq" value= "40" />          
-  <param name="lidar_ranging/view_span" value= "1.0" /> 
+  <param name="lidar_ranging/view_span" value= "0.125" /> 
   <param name="lidar_ranging/range" value= "1.0" />         
   <node pkg="testbed_temp" type="lidar-ranging.py" name="lidar_ranging" output="screen">
-  </node> </group>
+  </node>
+  
+  </group>
 
 </launch>

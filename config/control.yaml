@@ -1,12 +1,11 @@
-# Toyota F1-tenth individual vehicle control parameters (copy as needed)
-# Author: Varundev Suresh Babu
-# Date: 06/21/2019
+# Akila Ganlath
 
-
+# Joint States Publishers -----------------------------------
 joint_state_controller:
   type: joint_state_controller/JointStateController
   publish_rate: 50
 
+# State Controllers ---------------------------------------
 left_rear_wheel_velocity_controller:
   type: effort_controllers/JointVelocityController
   pid: {p: 1.0, i: 0.0, d: 0.0, i_clamp: 0.0}

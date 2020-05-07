@@ -10,36 +10,57 @@
   <xacro:property name="WHEELSURFACESLIP" value="0.1" />
   <xacro:property name="WHEELJOINTDAMPING" value="0.5" />
   <xacro:property name="WHEELJOINTFRICTION" value="0.5" />
-  <xacro:property name="WHEEL_WIDTH" value="0.06" />
-  <xacro:property name="WHEEL_RADIUS" value="0.055" />
+  <xacro:property name="total_mass" value="20.0" />
+  <xacro:property name="length" value="0.860" />
+  <xacro:property name="width" value="0.450" />
+  <xacro:property name="height" value="0.280" />
+  <xacro:property name="wheel_mass" value="0.453592" />
+  <xacro:property name="wheel_radius" value="0.0775" />
+  <xacro:property name="wheel_width" value="0.062" />
+  <xacro:property name="wheel_base" value="0.505" />
+
+
+
 
 <!-- ###### INERTIA, VISUAL, & COLLISION MACROS ####################################-->
 
   <!-- inertial parameter macros -->
 
   <xacro:macro name="chassis_inertial_params">
-    <origin xyz="0.1477 0 0" rpy="0 0 0" />
-    <mass value="13.0" />
-    <inertia ixx="0.010609" ixy="0"          ixz="0"
+    <origin xyz="0.14 0 0" rpy="0 0 0" />
+    <mass value="${total_mass}" />
+    <inertia ixx="${total_mass * (width * width + height * height) / 12}"
+               ixy="0" ixz="0"
+               iyy="${total_mass * (length * length + height * height) / 12}"
+               iyz="0"
+               izz="${total_mass * (width * width + length * length) / 12}"/>
+    <!-- <inertia ixx="0.010609" ixy="0"          ixz="0"
                             iyy="0.050409"   iyz="0"
-                                             izz="0.05865" />
+                                             izz="0.05865" /> -->
   </xacro:macro>
 
   <xacro:macro name="left_wheels_inertial_params">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
-    <mass value="0.453592" />
-    <inertia ixx="0.00026046" ixy="0"          ixz="0"
-                              iyy="0.00026046" iyz="0"
-                                              izz="0.00041226" />
+    <mass value="${wheel_mass}" />
+    <inertia ixx="${wheel_mass*(3*wheel_radius*wheel_radius + wheel_width*wheel_width)/12.0}" ixy="0" ixz="0"
+             iyy="${wheel_mass*(3*wheel_radius*wheel_radius + wheel_width*wheel_width)/12.0}" iyz="0"
+             izz="${0.5**wheel_mass*wheel_radius*wheel_radius}" />
+    <!-- <inertia ixx="0.00026046" ixy="0"          ixz="0"
+                                  iyy="0.00026046" iyz="0"
+                                                  izz="0.00041226" /> -->
   </xacro:macro>
 
   <xacro:macro name="right_wheels_inertial_params">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
-    <mass value="0.453592" />
+    <mass value="${wheel_mass}" />
+    <inertia ixx="${wheel_mass*(3*wheel_radius*wheel_radius + wheel_width*wheel_width)/12.0}" ixy="0" ixz="0"
+             iyy="${wheel_mass*(3*wheel_radius*wheel_radius + wheel_width*wheel_width)/12.0}" iyz="0"
+             izz="${0.5**wheel_mass*wheel_radius*wheel_radius}" />
+    <!-- <mass value="0.453592" />
     <inertia ixx="0.00026046" ixy="0"          ixz="0"
                               iyy="0.00026046" iyz="0"
-                                               izz="0.00041226" />
-  </xacro:macro>
+                                               izz="0.00041226" /> -->
+  </xacro:macro> 
 
   <xacro:macro name="steering_hinge_inertial_params">
     <origin xyz="0 0 0" rpy="0 0 0" />
@@ -61,9 +82,9 @@
   <!-- visual geometry macros -->
 
   <xacro:macro name="chassis_geometry">
-    <origin rpy="-1.5708 0 3.1416" xyz="0.165 0.3305 -0.01"/>
+    <origin rpy="-1.5708 0 3.1416" xyz="${wheel_radius + 0.154} 0 ${wheel_radius-0.0225}"/>
     <geometry>
-      <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.STL" scale="0.00095 0.000925 0.000925"/>
+      <mesh filename="package://f1tenth-sim/urdf/meshes/chassis.stl" scale="0.00145 0.0015 0.0015"/>
     </geometry>
   </xacro:macro>
 
@@ -71,28 +92,28 @@
   <xacro:macro name="left_rear_wheel_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0012 0.0012 0.0012"/>
+      <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0016 0.0016 0.0016"/>
     </geometry>
   </xacro:macro>
 
-  <xacro:macro name="right_rear_wheel_geometry">
+  <xacro:macro name="right_rear_wheel_geometry">3305
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0012 0.0012 0.0012"/>
+      <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0016 0.0016 0.0016"/>
     </geometry>
   </xacro:macro>
 
   <xacro:macro name="left_front_wheel_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0012 0.0012 0.0012"/>
+      <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0016 0.0016 0.0016"/>
     </geometry>
   </xacro:macro>
 
   <xacro:macro name="right_front_wheel_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0012 0.0012 0.0012"/>
+      <mesh filename="package://f1tenth-sim/urdf/meshes/wheel.dae" scale="0.0016 0.0016 0.0016"/>
     </geometry>
   </xacro:macro>
 
@@ -113,23 +134,23 @@
   <!-- collision macros -->
 
   <xacro:macro name="chassis_collision_geometry">
-    <origin xyz="0 0 -0.3" rpy="0 0 0" />
+    <origin xyz="0 0 .05" rpy="0 0 0" />
     <geometry>
-      <box size="0.860 0.450 0.001"/>
+      <box size="0.860 0.450 0.280"/>
     </geometry>
   </xacro:macro>
 
   <xacro:macro name="left_wheels_collision_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <cylinder length="${WHEEL_WIDTH}" radius="${WHEEL_RADIUS}" />
+      <cylinder length="${wheel_width}" radius="${wheel_radius}" />
     </geometry>
   </xacro:macro>
 
   <xacro:macro name="right_wheels_collision_geometry">
     <origin xyz="0 0 0.0225" rpy="0 0 0" />
     <geometry>
-      <cylinder length="${WHEEL_WIDTH}" radius="${WHEEL_RADIUS}" />
+      <cylinder length="${wheel_width}" radius="${wheel_radius}" />
     </geometry>
   </xacro:macro>
 
@@ -188,7 +209,7 @@
   </link>
 
   <joint name="$(arg robot_name)_base_link_joint" type="fixed">
-    <origin xyz="0 0 0.05" rpy="0 0 0" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
     <parent link="$(arg robot_name)_base_link" />
     <child link="$(arg robot_name)_chassis" />
   </joint>
@@ -267,7 +288,7 @@
   </link>
 
   <joint name="$(arg robot_name)_left_rear_wheel_joint" type="continuous">
-    <origin xyz="0 0.1 0" rpy="-1.5708 0 0" />
+    <origin xyz="0 ${(width/2 - wheel_width)} 0" rpy="-1.5708 0 0" />
     <parent link="$(arg robot_name)_chassis" />
     <child link="$(arg robot_name)_left_rear_wheel" />
     <axis xyz="0 0 1" />
@@ -337,7 +358,7 @@
   </link>
 
   <joint name="$(arg robot_name)_right_rear_wheel_joint" type="continuous">
-    <origin xyz="0 -0.1 0" rpy="1.5708 0 0" />
+    <origin xyz="0 ${-(width/2 - wheel_width)} 0" rpy="1.5708 0 0" />
     <parent link="$(arg robot_name)_chassis" />
     <child link="$(arg robot_name)_right_rear_wheel" />
     <axis xyz="0 0 -1" />
@@ -359,7 +380,7 @@
   </link>
 
   <joint name="$(arg robot_name)_left_steering_hinge_joint" type="revolute">
-    <origin xyz="0.325 0.1 0" rpy="0 0 0" />
+    <origin xyz="${wheel_base} ${(width/2 - wheel_width)} 0" rpy="0 0 0" />
     <parent link="$(arg robot_name)_chassis" />
     <child link="$(arg robot_name)_left_steering_hinge" />
     <axis xyz="0 0 1" />
@@ -381,7 +402,7 @@
   </link>
 
   <joint name="$(arg robot_name)_right_steering_hinge_joint" type="revolute">
-    <origin xyz="0.325 -0.1 0" rpy="0 0 0" />
+    <origin xyz="${wheel_base} ${-(width/2 - wheel_width)} 0" rpy="0 0 0" />
     <parent link="$(arg robot_name)_chassis" />
     <child link="$(arg robot_name)_right_steering_hinge" />
     <axis xyz="0 0 1" />
@@ -413,7 +434,7 @@
   </link>
 
   <joint name="$(arg robot_name)_hokuyo_joint" type="fixed">
-    <origin xyz="0.35 0.0 0.075" rpy="0 0 0"/>
+    <origin xyz="${wheel_base + 0.035} 0.0 0.09" rpy="0 0 0"/>
     <parent link="$(arg robot_name)_chassis" />
     <child link="$(arg robot_name)_laser" />
     <axis xyz="0 0 1" />
@@ -539,9 +560,10 @@
   <xacro:unless value="$(optenv DISABLE_GAZEBO_LASER false)">
     <gazebo reference="$(arg robot_name)_laser">
       <material>Gazebo/Grey</material>
-      <sensor type="ray" name="$(arg robot_name)_hokuyo_sensor">
+      <sensor type="gpu_ray" name="$(arg robot_name)_hokuyo_sensor">
+      <!-- <sensor type="ray" name="$(arg robot_name)_hokuyo_sensor"> -->
         <pose>0 0 0.0124 0 0 0</pose>
-        <visualize>true</visualize>
+        <visualize>false</visualize>
         <update_rate>40</update_rate>
         <ray>
           <scan>
@@ -562,7 +584,8 @@
             <stddev>0.01</stddev>
           </noise>
         </ray>
-        <plugin name="gazebo_ros_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <plugin name="gazebo_ros_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+        <!-- <plugin name="gazebo_ros_hokuyo_controller" filename="libgazebo_ros_laser.so"> -->
           <topicName>/$(arg robot_name)/scan</topicName>
           <frameName>$(arg robot_name)_laser</frameName>
         </plugin>

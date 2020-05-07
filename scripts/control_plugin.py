@@ -35,7 +35,7 @@ RFW_state   = '/{}/right_front_wheel_velocity_controller/state'.format(car_name)
 command_topic     = '/{}/multiplexer/command'.format(car_name)
 
 # state publisher topics
-odom_pub_topic  = '/{}/base/odom'.format(car_name)
+odom_pub_topic  = '/{}/state/speed'.format(car_name)
 footprint_topic = '/{}/base/footprint'.format(car_name)
 
 # control topics
